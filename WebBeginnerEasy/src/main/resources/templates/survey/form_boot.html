@@ -1,0 +1,84 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="starter-template.css"  th:href="@{/css/starter-template.css}" rel="stylesheet">
+  </head>
+
+  <body>
+
+
+    <div th:replace="~{block/header_boot::headerA_boot}"></div>
+    <main role="main" class="container">
+
+      <div class="starter-template">
+        <h1 th:text="${title}">Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+      </div>
+      
+
+	<div th:unless="${#strings.isEmpty(complete)}" >
+		<div th:text="${complete}" class="alert alert-success" role="alert">
+		  A simple success alert—check it out!
+		</div>
+	</div>
+	
+	<form method="post" action="#" th:action="@{/survey/confirm}" th:object="${surveyForm}">
+	  <div class="form-group">
+	    <label for="age">年齢</label>
+	    <input type="text" name="age" class="form-control" id="age" th:value="*{age}">
+	  </div>
+	  <div class="text-danger mb-4" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
+	  <div class="form-group">
+	    <label for="satisfaction">満足度</label>
+<!-- 	    <input type="radio" name="satisfaction" class="form-control" id="satisfaction"  th:value="*{satisfaction}">
+ -->	
+ <div class="btn-group btn-group-toggle" data-toggle="buttons">
+ 		<label class="btn btn-secondary">
+ 			<input type="radio" name="satisfaction" class="form-control" value="1" th:checked="*{satisfaction == 1}">1
+ 		</label>
+ 		<label class="btn btn-secondary">
+			<input type="radio" name="satisfaction" class="form-control" value="2" th:checked="*{satisfaction == 2}">2
+		</label>
+		<label class="btn btn-secondary">
+		<input type="radio" name="satisfaction" class="form-control" value="3" th:checked="*{satisfaction == 3}">3
+		</label>
+		<label class="btn btn-secondary">
+		<input type="radio" name="satisfaction" class="form-control" value="4" th:checked="*{satisfaction == 4}">4
+		</label>
+		<label class="btn btn-secondary">
+		<input type="radio" name="satisfaction" class="form-control" value="5" th:checked="*{satisfaction == 5}">5
+		</label>
+	</div>	
+	  </div>
+	  <div class="text-danger mb-4" th:if="${#fields.hasErrors('satisfaction')}" th:errors="*{satisfaction}"></div>
+	  <div class="form-group">
+	    <label for="comment">コメント</label>
+	    <textarea  name="comment" class="form-control" id="detail" rows="3" th:field="*{comment}"></textarea>
+	  </div>
+	  <div class="text-danger mb-4" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+	  <button type="submit" class="btn btn-primary">確認する</button>
+	</form>
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="@{/js/jquery-slim.min.js}"><\/script>')</script>
+    <script src="../../assets/js/vendor/popper.min.js"  th:src="@{/js/popper.min.js}"></script>
+    <script src="../../dist/js/bootstrap.min.js"  th:src="@{/js/bootstrap.min.js}"></script>
+  </body>
+</html>
